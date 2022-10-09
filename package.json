@@ -1,0 +1,108 @@
+{
+  "name": "bookreader",
+  "displayName": "bookReader",
+  "description": "chase some funny",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.72.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["*"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Thief-Book",
+      "type": "object",
+      "properties": {
+        "thiefBook.pageNumber": {
+          "type": "number",
+          "default": 1,
+          "description": "当前小说页数(支持跳转) & Pages of Current Novels (Support jumping)"
+        },
+        "thiefBook.pageSize": {
+          "type": "number",
+          "default": 50,
+          "description": "每页文字数量 & Number of text per page"
+        },
+        "thiefBook.isEnglish": {
+          "type": "boolean",
+          "default": false,
+          "description": "是否为英文书籍？ & Is it an English book？"
+        },
+        "thiefBook.lineBreak": {
+          "type": "string",
+          "default": " ",
+          "description": "换行分隔符号，默认一个空格 & Line Break Separation Symbol,Default a space"
+        },
+        "thiefBook.filePath": {
+          "type": "string",
+          "default": "",
+          "description": "TXT格式小说绝对路径 & Absolute Path of TXT Format Novels"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "extension.displayCode",
+        "title": "thief-book.DisplayCode"
+      },
+      {
+        "command": "extension.getPreviousPage",
+        "title": "thief-book.PreviousBook"
+      },
+      {
+        "command": "extension.getNextPage",
+        "title": "thief-book.NextBook"
+      },
+      {
+        "command": "extension.getJumpingPage",
+        "title": "thief-book.JumpingBook"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.getPreviousPage",
+        "key": "ctrl+alt+,",
+        "mac": "cmd+,",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "extension.getNextPage",
+        "key": "ctrl+alt+.",
+        "mac": "cmd+.",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "extension.getJumpingPage",
+        "key": "ctrl+alt+;",
+        "mac": "cmd+;"
+      },
+      {
+        "command": "extension.displayCode",
+        "key": "ctrl+m",
+        "mac": "cmd+m"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.72.0",
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "eslint": "^8.20.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.0.0",
+    "typescript": "^4.7.4",
+    "@vscode/test-electron": "^2.1.5"
+  }
+}
